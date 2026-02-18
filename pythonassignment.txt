@@ -1,0 +1,239 @@
+for missing values
+
+
+
+for data_1
+{'Strategy': 'knn', 'R²': 0.768164835326541, 'MSE': 716.1125588726221, 'MAE': 20.227069343923137}
+{'Strategy': 'drop', 'R²': 0.7837841538357206, 'MSE': 680.306201323168, 'MAE': 19.1922940136984}
+{'Strategy': 'mean', 'R²': 0.7866801785041438, 'MSE': 669.1816988268763, 'MAE': 19.992544303962557}
+{'Strategy': 'median', 'R²': 0.7857216264390964, 'MSE': 672.2725550675547, 'MAE': 19.998935545709696}
+{'Strategy': 'ffill', 'R²': 0.7365908209783039, 'MSE': 819.2751117059104, 'MAE': 21.934916157048043}
+{'Strategy': 'bfill', 'R²': 0.7501872074037526, 'MSE': 779.4070532786578, 'MAE': 21.2378630360402}
+
+Based on cross-validation performance, mean imputation was selected as it achieved the highest R² score and lowest MSE, indicating the best generalization performance among all tested strategies.
+
+for data_2
+{'Strategy': 'drop', 'R²': 0.7995129227832407, 'MSE': 640.9159801966438, 'MAE': 19.644102744416934}
+{'Strategy': 'mean', 'R²': 0.8233726344627119, 'MSE': 525.6480985254406, 'MAE': 17.12635322346021}
+{'Strategy': 'median', 'R²': 0.8260887419542436, 'MSE': 518.5146180875314, 'MAE': 16.887714058054947}
+{'Strategy': 'knn', 'R²': 0.7970642009347194, 'MSE': 621.0220885922456, 'MAE': 19.130365012454067}
+{'Strategy': 'ffill', 'R²': 0.7245663243061298, 'MSE': 818.3776837840462, 'MAE': 22.104466675647085}
+{'Strategy': 'bfill', 'R²': 0.7339813194301991, 'MSE': 779.9952266930311, 'MAE': 21.411847400128927}
+For data_2, median imputation was selected as it achieved the highest R² score and the lowest MSE and MAE values, indicating superior predictive performance and robustness to potential outliers.
+
+for data_3
+{'Strategy': 'drop', 'R²': 0.9031752044006767, 'MSE': 25.881369556020083, 'MAE': 3.9698970819110904}
+{'Strategy': 'mean', 'R²': 0.9379420438260466, 'MSE': 17.71035215350873, 'MAE': 3.3520129711160904}
+{'Strategy': 'median', 'R²': 0.9382757702306954, 'MSE': 17.615359469094592, 'MAE': 3.3348820252004607}
+{'Strategy': 'knn', 'R²': 0.9528401690072045, 'MSE': 13.51651145336562, 'MAE': 2.969407245291164}
+{'Strategy': 'ffill', 'R²': 0.9266462632644897, 'MSE': 20.822370994498435, 'MAE': 3.5771504052391614}
+{'Strategy': 'bfill', 'R²': 0.9226103570049637, 'MSE': 22.38524020445353, 'MAE': 3.730783660050528}
+
+✅ Highest R² (0.9528) → Strongest predictive power
+
+✅ Lowest MSE (13.51) → Smallest squared error
+
+✅ Lowest MAE (2.97) → Most accurate predictions
+
+It clearly outperforms all other strategies by a noticeable margin.
+
+
+data_4
+{'Strategy': 'drop', 'R²': 0.11973475291570494, 'MSE': 838.9130933940114, 'MAE': 12.184748928221424}
+{'Strategy': 'mean', 'R²': 0.47615223805816154, 'MSE': 2608.642478432456, 'MAE': 32.75684139341822}
+{'Strategy': 'median', 'R²': 0.4766756483383411, 'MSE': 2605.6995202261983, 'MAE': 32.74234141279038}
+{'Strategy': 'knn', 'R²': 0.47615223805816154, 'MSE': 2608.642478432456, 'MAE': 32.75684139341822}
+{'Strategy': 'ffill', 'R²': 0.5241309973197475, 'MSE': 2418.889510211101, 'MAE': 31.071270000311433}
+{'Strategy': 'bfill', 'R²': 0.49357149625551705, 'MSE': 2588.410137753778, 'MAE': 32.13900698101854}
+
+
+
+Data_4 likely has:
+
+Many problematic missing rows
+
+Imputation introduces heavy distortion
+
+Removing missing rows preserves cleaner structure
+
+So dropping rows works better here.
+
+
+
+
+
+Dataset	Best Strategy
+data_1	✅ Mean
+data_2	✅ Median
+data_3	✅ KNN
+data_4	✅ Drop
+
+
+
+for encoding value
+for data_1
+{'Strategy': 'ordinal', 'R²': 0.9392285987101416, 'MSE': 34129260.30988559, 'MAE': 5082.767879685891}
+{'Strategy': 'onehot', 'R²': 0.9386616326749433, 'MSE': 34451982.558427855, 'MAE': 5102.9937945671145}
+
+
+for data_2
+{'Strategy': 'onehot', 'R²': 0.9467930151368561, 'MSE': 59026310.15535543, 'MAE': 6330.126860960851}
+{'Strategy': 'ordinal', 'R²': 0.15878682492148305, 'MSE': 936206349.3363737, 'MAE': 24764.1907374151}
+
+Encoding strategy significantly affects model performance. For data_1, ordinal encoding slightly outperformed one-hot encoding, indicating that categorical variables may possess ordinal structure. However, for data_2, one-hot encoding drastically outperformed ordinal encoding, suggesting that the categorical variables are nominal and do not have inherent ordering.
+Dataset	Best Encoding
+data_1	✅ Ordinal
+data_2	✅ One-Hot
+
+
+
+for label_distribution
+for data_1
+{'Strategy': 'none', 'F1-Score': 0.6457963738469645, 'Precision': 0.9888888888888889, 'Recall': 0.4836781609195403, 'Balanced Accuracy': 0.7417883447925961}
+{'Strategy': 'under', 'F1-Score': 0.19496822329316646, 'Precision': 0.1127546624453841, 'Recall': 0.720919540229885, 'Balanced Accuracy': 0.8180871694355482}
+{'Strategy': 'over', 'F1-Score': 0.18234299687179234, 'Precision': 0.1044371763354042, 'Recall': 0.7209195402298851, 'Balanced Accuracy': 0.8143824613201593}
+{'Strategy': 'smote', 'F1-Score': 0.1796520175457244, 'Precision': 0.10287199712746171, 'Recall': 0.7142528735632185, 'Balanced Accuracy': 0.8105925584905513}
+{'Strategy': 'weights', 'F1-Score': 0.18155992880448274, 'Precision': 0.10409980830154741, 'Recall': 0.7142528735632185, 'Balanced 
+
+
+fordata_2
+{'Strategy': 'weights', 'F1-Score': 0.1460822537574484, 'Precision': 0.08387250735534488, 'Recall': 0.5833333333333333, 'Balanced Accuracy': 0.7387634241513863}
+{'Strategy': 'smote', 'F1-Score': 0.14000227181173472, 'Precision': 0.07998258446534309, 'Recall': 0.5833333333333333, 'Balanced Accuracy': 0.736214993611658}
+{'Strategy': 'over', 'F1-Score': 0.14243589743589744, 'Precision': 0.08158856018896588, 'Recall': 0.5833333333333333, 'Balanced Accuracy': 0.7372354017749233}
+{'Strategy': 'under', 'F1-Score': 0.15466283811535525, 'Precision': 0.09302697227745058, 'Recall': 0.5833333333333333, 'Balanced Accuracy': 0.7195129320763838}
+{'Strategy': 'none', 'F1-Score': 0.7047619047619047, 'Precision': 1.0, 'Recall': 0.5833333333333333, 'Balanced Accuracy': 0.7916666666666666}
+
+
+
+for data_3
+{'Strategy': 'none', 'F1-Score': 0.857011434043131, 'Precision': 0.8597977486026, 'Recall': 0.8543896321070236, 'Balanced Accuracy': 0.9191060992679967}
+{'Strategy': 'under', 'F1-Score': 0.7913390293898865, 'Precision': 0.6730945558301172, 'Recall': 0.9604515050167224, 'Balanced Accuracy': 0.9531700149177309}
+{'Strategy': 'over', 'F1-Score': 0.7903139612290501, 'Precision': 0.6715368779090584, 'Recall': 0.9604515050167224, 'Balanced Accuracy': 0.9530026975724996}
+{'Strategy': 'smote', 'F1-Score': 0.7895211730052347, 'Precision': 0.6708671115142893, 'Recall': 0.9594853214418432, 'Balanced Accuracy': 0.9524637710906132}
+{'Strategy': 'weights', 'F1-Score': 0.7906227919531205, 'Precision': 0.6719754744002864, 'Recall': 0.9604515050167224, 'Balanced Accuracy': 0.9530585011439282}
+
+
+for data_4
+{'Strategy': 'none', 'F1-Score': 0.16277722732627256, 'Precision': 0.9092255598707212, 'Recall': 0.0895380890742605, 'Balanced Accuracy': 0.5436377595768164}
+{'Strategy': 'under', 'F1-Score': 0.3954467847074409, 'Precision': 0.29164247800710713, 'Recall': 0.6139879668248718, 'Balanced Accuracy': 0.6154404426097423}
+{'Strategy': 'over', 'F1-Score': 0.39550704100269, 'Precision': 0.2911737288095739, 'Recall': 0.6164329545999329, 'Balanced Accuracy': 0.6154687190239857}
+{'Strategy': 'smote', 'F1-Score': 0.39678714142339644, 'Precision': 0.292354735402452, 'Recall': 0.6174109497099574, 'Balanced Accuracy': 0.6167744968979403}
+{'Strategy': 'weights', 'F1-Score': 0.3970381090413281, 'Precision': 0.2923002982723462, 'Recall': 0.6188779423749942, 'Balanced Accuracy': 0.6170053622250228}
+
+Data_1, Data_2, Data_3 → Not heavily imbalanced, so resampling hurts performance.
+
+Data_4 → Clearly imbalanced; using class weights improves recall and F1 significantly.
+
+Dataset	Best Label Strategy
+data_1	✅ none
+data_2	✅ none
+data_3	✅ none
+data_4	✅ weights
+
+
+
+models
+-classification
+for data_4
+'Model': 'LOGISTIC', 'Accuracy': 0.9899999999999999, 'Precision': 0.9920380273321451, 'Recall': 0.9879999999999999, 'F1_Score': 0.9899694492062272}
+ 'Model': 'KNN', 'Accuracy': 0.9470000000000001, 'Precision': 0.9346630127553711, 'Recall': 0.962, 'F1_Score': 0.9478047576610236}
+ 'Model': 'SVM', 'Accuracy': 0.983, 'Precision': 0.9899158665866586, 'Recall': 0.976, 'F1_Score': 0.9828421236195716}
+ 'Model': 'TREE', 'Accuracy': 0.9789999999999999, 'Precision': 0.9768346674835324, 'Recall': 0.982, 'F1_Score': 0.9791661601816724}
+
+for data_5
+'Model': 'LOGISTIC', 'Accuracy': 0.8780000000000001, 'Precision': 0.8830589554662446, 'Recall': 0.8720000000000001, 'F1_Score': 0.8770292201891661}
+ 'Model': 'KNN', 'Accuracy': 1.0, 'Precision': 1.0, 'Recall': 1.0, 'F1_Score': 1.0} 
+'Model': 'SVM', 'Accuracy': 0.998, 'Precision': 0.996039603960396, 'Recall': 1.0, 'F1_Score': 0.9980099502487562}
+'Model': 'TREE', 'Accuracy': 0.993, 'Precision': 0.990233009708738, 'Recall': 0.9960000000000001, 'F1_Score': 0.9930738916256157}
+
+
+for data_6
+'LOGISTIC', 'Accuracy': 0.44800000000000006, 'Precision': 0.44744693047482575, 'Recall': 0.44399999999999995, 'F1_Score': 0.44527604378586716}
+'Model': 'KNN', 'Accuracy': 0.867, 'Precision': 0.8575213923448313, 'Recall': 0.882, 'F1_Score': 0.8693199219947821}
+ 'Model': 'SVM', 'Accuracy': 0.8809999999999999, 'Precision': 0.8862161992596775, 'Recall': 0.876, 'F1_Score': 0.8805067489740857}
+ 'Model': 'TREE', 'Accuracy': 0.8310000000000001, 'Precision': 0.8424908967927921, 'Recall': 0.8140000000000001, 'F1_Score': 0.827977400087625}
+
+for data_7
+'Model': 'LOGISTIC', 'Accuracy': 0.577, 'Precision': 0.042105263157894736, 'Recall': 0.00975609756097561, 'F1_Score': 0.015841584158415842}
+'Model': 'KNN', 'Accuracy': 0.9400000000000001, 'Precision': 0.9042261018776744, 'Recall': 0.9564208051719071, 'F1_Score': 0.9292343270326182}
+ 'Model': 'SVM', 'Accuracy': 0.8109999999999999, 'Precision': 0.6867170766392185, 'Recall': 0.9975903614457831, 'F1_Score': 0.8133153377855995}
+ 'Model': 'TREE', 'Accuracy': 0.9970000000000001, 'Precision': 0.9951807228915662, 'Recall': 0.9975903614457831, 'F1_Score': 0.9963636363636363}
+
+Logistic works well when data is linearly separable.
+
+KNN works extremely well when class clusters are clearly separated.
+
+SVM works well for complex but smooth boundaries.
+
+Decision Tree works best when there are strong rule-based splits.
+
+Dataset	Best Model
+data_4	✅ Logistic Regression
+data_5	✅ KNN
+data_6	✅ SVM
+data_7	✅ Decision Tree
+
+models 
+regression
+ for data_1
+{'Model': 'LINEAR', 'R²': 0.9591291710378096, 'MSE': 2.1997466477266956}
+{'Model': 'KNN', 'R²': 0.9495999762646564, 'MSE': 2.7105681826492876}
+{'Model': 'SVM', 'R²': 0.9577381485502133, 'MSE': 2.2742341589331474}
+{'Model': 'TREE', 'R²': 0.9161936685202671, 'MSE': 4.511488408807208}
+
+
+for data_2
+{'Model': 'LINEAR', 'R²': 0.006110984353269488, 'MSE': 12.98136568421084}
+{'Model': 'KNN', 'R²': 0.9946888334204281, 'MSE': 0.06938495595359498}
+{'Model': 'SVM', 'R²': 0.15223076084729914, 'MSE': 11.119756458139934}
+{'Model': 'TREE', 'R²': 0.9958234969407617, 'MSE': 0.05411104712744717}
+
+for data_3
+{'Model': 'LINEAR', 'R²': -0.006964577048536147, 'MSE': 54.8746853923847}
+{'Model': 'KNN', 'R²': 0.9184497620984203, 'MSE': 4.390029168973927}
+{'Model': 'SVM', 'R²': 0.9181279358985577, 'MSE': 4.380087327823963}
+{'Model': 'TREE', 'R²': 0.8553613547693504, 'MSE': 7.839287494887074}
+
+Data_1 → Strong linear structure
+
+Data_2 → Highly nonlinear, tree-based splits
+
+Data_3 → Complex nonlinear smooth boundary (SVM works best)
+
+
+Dataset	Best Regression Model
+data_1	✅ Linear Regression
+data_2	✅ Decision Tree
+data_3	✅ SVM
+
+
+
+scaling
+for data_1
+{'Strategy': 'none', 'R²': 0.24730553932014016, 'MSE': 2549.8050469545115, 'MAE': 40.713975442809}
+{'Strategy': 'minmax', 'R²': 0.9684739271680849, 'MSE': 106.62219554910374, 'MAE': 8.202637428123804}
+{'Strategy': 'standard', 'R²': 0.9684531356285643, 'MSE': 106.63394339124663, 'MAE': 8.196262134419786}
+
+
+for data_2
+{'Strategy': 'none', 'R²': 0.7717818276600444, 'MSE': 6078713.442290616, 'MAE': 250.70885611059884}
+{'Strategy': 'minmax', 'R²': 0.7717818276600444, 'MSE': 6078713.442290616, 'MAE': 250.70885611059884}
+{'Strategy': 'standard', 'R²': 0.7717818276600444, 'MSE': 6078713.442290616, 'MAE': 250.70885611059884}
+
+for data_3
+{'Strategy': 'none', 'R²': 0.35636047382149183, 'MSE': 1128.6132704167599, 'MAE': 28.10778039050577}
+{'Strategy': 'minmax', 'R²': 0.6057198019914308, 'MSE': 691.0631296581216, 'MAE': 21.32852358240405}
+{'Strategy': 'standard', 'R²': 0.8621612269808757, 'MSE': 241.23969773312925, 'MAE': 11.996526610626507}
+
+
+Linear models & SVM → sensitive to scaling → standard or min-max helps.
+
+Tree-based models → scale-invariant → no scaling needed.
+
+Always check metrics; scaling effect depends on model choice.
+
+Dataset	Best Scaling
+data_1	✅ Min-Max (or Standard)
+data_2	✅ None
+data_3	✅ Standard
+
